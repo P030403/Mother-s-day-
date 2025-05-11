@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mother's Day Celebration</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      flex-direction: column;
+    }
+
+    #countdown {
+      font-size: 6em;
+      color: #e91e63;
+      font-weight: bold;
+      animation: pop 1s ease-in-out;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    #message {
+      display: none;
+      text-align: center;
+      color: #d63384;
+      animation: fadeIn 1.5s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cakes {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .cakes img {
+      width: 120px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    canvas.fireworks {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.1.0/dist/index.umd.js"></script>
+</head>
+<body>
+  <div id="countdown">3</div>
+
+  <div id="message">
+    <h1>Happy Mother's Day!</h1>
+    <div class="cakes">
+      <img src="https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif" alt="Cake 1" />
+      <img src="https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif" alt="Cake 2" />
+      <img src="https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif" alt="Cake 3" />
+    </div>
+  </div>
+
+  <canvas class="fireworks"></canvas>
+
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const countdownEl = document.getElementById('countdown');
+    const messageEl = document.getElementById('message');
+    let count = 3;
+
+    const countdownInterval = setInterval(() => {
+      count--;
+      if (count > 0) {
+        countdownEl.textContent = count;
+      } else {
+        clearInterval(countdownInterval);
+        countdownEl.style.display = 'none';
+        messageEl.style.display = 'block';
+      }
+    }, 1000);
+
+    // Fireworks
+    const container = document.querySelector('.fireworks');
+    const fireworks = new Fireworks.default(container, {
+      rocketsPoint: { min: 0.2, max: 0.8 },
+      lineWidth: { trace: 2, explosion: 3 },
+      brightness: { min: 50, max: 80 },
+      decay: { min: 0.015, max: 0.03 },
+      particles: 100,
+    });
+    fireworks.start();
+
+    // Redirect after 10 seconds
+    setTimeout(() => {
+      window.location.href = "page2.html";
+    }, 10000);
+  </script>
+</body>
+</html>

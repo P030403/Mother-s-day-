@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Mumma — A Journey of Love</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(#fff1f5, #fff7eb);
+    }
+
+    header {
+      text-align: center;
+      padding: 2.5rem 1rem 1rem;
+      background-color: #ff8fab;
+      color: white;
+      font-size: 2.2em;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #ff69b4;
+      padding: 1rem;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .flicker-heart {
+      display: inline-block;
+      animation: flicker 1s infinite alternate;
+      font-size: 2rem;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.1); }
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    section {
+      padding: 2rem 1rem;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .photo-gallery {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .photo-gallery img {
+      width: 260px;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+      border: 4px solid transparent;
+      transition: transform 0.6s ease, border-color 0.3s ease, opacity 0.6s ease;
+      transform: scale(1);
+      opacity: 0.8;
+    }
+
+    .photo-gallery img.zoomed {
+      transform: scale(1.15);
+      border-color: #ffb5c5;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      z-index: 2;
+      position: relative;
+      opacity: 1;
+    }
+
+    .hint {
+      color: white;
+      font-size: 1rem;
+      margin-top: 0.3rem;
+      animation: fadeIn 2s infinite;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #ffe0eb;
+      margin-top: 3rem;
+    }
+
+    .mothers-day {
+      font-size: 1.6rem;
+      color: #d63384;
+      font-weight: bold;
+      animation: fadeIn 3s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Moments With You Mumma❣️
+  </header>
+
+  <nav>
+    <a href="page3.html"><span class="flicker-heart">❤️</span></a>
+    <div class="hint">Tap the heart</div>
+  </nav>
+
+  <section>
+    <h2>Captured Smiles, Eternal Love</h2>
+    <div class="photo-gallery">
+      <img src="https://i.postimg.cc/kMhBZdVD/IMG-20250510-184724.jpg" alt="Mumma 1" />
+      <img src="https://i.postimg.cc/jjQrHsb2/IMG-20250510-183625.jpg" alt="Mumma 2" />
+      <img src="https://i.postimg.cc/fbBSHQ7W/IMG-20250510-183612.jpg" alt="Mumma 3" />
+      <img src="https://i.postimg.cc/L86MRdKZ/IMG-20250510-183551.jpg" alt="Mumma 4" />
+    </div>
+  </section>
+
+  <footer>
+    <p class="mothers-day">Forever Grateful — Happy Mother’s Day, Mumma!</p>
+  </footer>
+
+  <script>
+    const images = document.querySelectorAll('.photo-gallery img');
+
+    function updateZoomedImage() {
+      let minDistance = Infinity;
+      let closestImage = null;
+
+      images.forEach((img) => {
+        const rect = img.getBoundingClientRect();
+        const distance = Math.abs(rect.top + rect.height / 2 - window.innerHeight / 2);
+
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestImage = img;
+        }
+      });
+
+      images.forEach((img) => img.classList.remove('zoomed'));
+      if (closestImage) closestImage.classList.add('zoomed');
+    }
+
+    updateZoomedImage();
+    window.addEventListener('scroll', updateZoomedImage);
+  </script>
+</body>
+</html>
